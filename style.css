@@ -21,55 +21,25 @@ body {
 
 .puzzle {
   margin: 0 auto;
-  height: 300px;
-  width: 300px;
-  display: inline-grid;
-  grid-gap: 1px;
-  padding: 1px;
+  width: 50vw;
+  display: block;
   border: 1px solid black;
-  border-radius: 3px;
-  grid-template-areas: " item1 item2 item3 " "item4 item5 item6 " "item7 item8 . ";
 }
 .puzzle div {
+  box-sizing: border-box;
+  position: relative;
+  margin-bottom: 2px;
   display: flex;
   border: 1px solid black;
-  border-radius: 5px;
   align-items: center;
   justify-content: center;
   background-color: rgba(209, 209, 106, 0.5);
-  font-size: 3rem;
+  font-size: 2rem;
+  transition: all 1s;
 }
 
-.item1 {
-  grid-area: item1;
-}
-
-.item2 {
-  grid-area: item2;
-}
-
-.item3 {
-  grid-area: item3;
-}
-
-.item4 {
-  grid-area: item4;
-}
-
-.item5 {
-  grid-area: item5;
-}
-
-.item6 {
-  grid-area: item6;
-}
-
-.item7 {
-  grid-area: item7;
-}
-
-.item8 {
-  grid-area: item8;
+.hidden {
+  visibility: hidden;
 }
 
 /*# sourceMappingURL=style.css.map */
