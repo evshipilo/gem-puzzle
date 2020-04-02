@@ -23,13 +23,14 @@ body {
   margin: 0 auto;
   width: 50vw;
   display: block;
+  position: relative;
   border: 1px solid black;
 }
 .puzzle div {
   box-sizing: border-box;
-  position: relative;
+  position: absolute;
   margin-bottom: 2px;
-  display: flex;
+  display: inline-flex;
   border: 1px solid black;
   align-items: center;
   justify-content: center;

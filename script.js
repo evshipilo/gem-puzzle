@@ -10,14 +10,13 @@ createPuzzleDiv();
 const puzzleDiv = document.querySelector('.puzzle');
 // response puzzle
 let [puzzleWidth] = getComputedStyle(puzzleDiv).width.split('px');// деструктурир присвивание
-let widthOfItems = puzzleWidth / numOfItems;
+const widthOfItems = 100 / Math.sqrt(numOfItems);
 puzzleDiv.style.height = `${+puzzleWidth}px`;
 window.onresize = function () {
   [puzzleWidth] = getComputedStyle(puzzleDiv).width.split('px');
   puzzleDiv.style.height = `${+puzzleWidth}px`;
-  widthOfItems = puzzleWidth / numOfItems;
+  //widthOfItems = puzzleWidth / Math.sqrt(numOfItems);
 };
-
 function makeStraightArrOfItemValues() {
   for (let i = 1; i <= numOfItems; i += 1) {
     arrOfItemValues.push(i);
@@ -30,11 +29,11 @@ function setPositionOfItem() {
   let j = 0;
   let k = 0;
   for (let i = 0; i < arrOfItems.length; i += 1) {
+    arrOfItems[i].style.width = `${widthOfItems}%`;
+    arrOfItems[i].style.height = `${widthOfItems}%`;
+    arrOfItems[i].style.top = `${k * widthOfItems}%`;
+    arrOfItems[i].style.left = `${j * widthOfItems}%`;
     j += 1;
-    arrOfItems[i].style.width = `${widthOfItems}px`;
-    arrOfItems[i].style.height = `${widthOfItems}px`;
-    arrOfItems[i].style.top = `${k * widthOfItems}px`;
-    arrOfItems[i].style.left = `${j * widthOfItems}px`;
     if (j === Math.sqrt(numOfItems)) { j = 0; k += 1; }
   }
 }
@@ -51,4 +50,4 @@ function generatePuzzleRandome() {
   console.log(arrOfItems);
   setPositionOfItem();
 }
- generatePuzzleRandome();
+generatePuzzleRandome();
