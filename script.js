@@ -1,7 +1,7 @@
 
 const body = document.querySelector('body');
 const arrOfItemValues = [];
-const numOfItems = 16;
+const numOfItems = 64;
 let arrOfItems = [];
 function createPuzzleDiv() {
   body.insertAdjacentHTML('afterbegin', '<div class="puzzle"></div>');

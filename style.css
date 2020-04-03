@@ -24,7 +24,7 @@ body {
   width: 50vw;
   display: block;
   position: relative;
-  border: 1px solid black;
+  outline: 2px solid black;
 }
 .puzzle div {
   box-sizing: border-box;
@@ -35,8 +35,8 @@ body {
   align-items: center;
   justify-content: center;
   background-color: rgba(209, 209, 106, 0.5);
-  font-size: 2rem;
-  transition: all 1s;
+  font-size: 4.5vw;
+  border-radius: 10%;
 }
 
 .hidden {
