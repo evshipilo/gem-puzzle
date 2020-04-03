@@ -25,6 +25,7 @@ body {
   display: block;
   position: relative;
   outline: 2px solid black;
+  cursor: pointer;
 }
 .puzzle div {
   box-sizing: border-box;
@@ -36,11 +37,11 @@ body {
   justify-content: center;
   background-color: rgba(209, 209, 106, 0.5);
   font-size: 4.5vw;
-  border-radius: 10%;
+  transition: all 1s;
 }
 
 .hidden {
-  visibility: hidden;
+  opacity: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
