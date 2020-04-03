@@ -81,8 +81,9 @@ puzzleDiv.addEventListener('click', (evt) => {
       || ((numOfClickedItem - 1) === numOfEmptyItem
           && (numOfEmptyItem) % (Math.sqrt(numOfItems)) !== 0)
   ) {
-    evt.target.style.left = `${emptyItemLeft}%`;
-    evt.target.style.top = `${emptyItemTop}%`;
+    const event = evt;
+    event.target.style.left = `${emptyItemLeft}%`;
+    event.target.style.top = `${emptyItemTop}%`;
     emptyItem.style.left = `${clickItemLeft}%`;
     emptyItem.style.top = `${clickItemTop}%`;
   }
