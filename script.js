@@ -2,9 +2,8 @@
 const body = document.querySelector('body');
 const arrOfItemValues = [];
 // let arrOfItemValuesStraight = [];
-const numOfItems = 64;
+const numOfItems = 9;
 let arrOfItems = [];
-let clickedItem;
 
 function createPuzzleDiv() {
   body.insertAdjacentHTML('afterbegin', '<div class="puzzle"></div>');
@@ -63,24 +62,28 @@ function generatePuzzleRandom() {
 
 generatePuzzleRandom();
 
-function getNumberOfClickedItem() {
-  for (let i = 0; i < numOfItems; i += 1) {
-    if (arrOfItems[i].getAttribute('class').split('item')[1] === clickedItem) return i + 1;
-  }
-  return false;
-}
-
-function getNumberOfEmptyItem() {
-  for (let i = 0; i < numOfItems; i += 1) {
-    if (+arrOfItems[i].getAttribute('class').split('item')[1] === numOfItems) return i + 1;
-  }
-  return false;
-}
-
 puzzleDiv.addEventListener('click', (evt) => {
-  [, clickedItem] = evt.target.getAttribute('class').split('item');// деструктуризация
-  arrOfItems = document.querySelectorAll('.puzzle div');
-  const numberOfClickedItem = getNumberOfClickedItem();
-  const numberOfEmptyItem = getNumberOfEmptyItem();
+  const emptyItem = document.querySelector(`.item${numOfItems}`);
+  const [clickItemLeft] = evt.target.style.left.split('%');
+  const [clickItemTop] = evt.target.style.top.split('%');
+  const [emptyItemLeft] = emptyItem.style.left.split('%');
+  const [emptyItemTop] = emptyItem.style.top.split('%');
 
+  const numOfClickedItem = Math.round((clickItemLeft * Math.sqrt(numOfItems)
+      + clickItemTop * numOfItems) / 100) + 1;
+  const numOfEmptyItem = Math.round((emptyItemLeft * Math.sqrt(numOfItems)
+      + emptyItemTop * numOfItems) / 100) + 1;
+
+  if (numOfClickedItem + Math.sqrt(numOfItems) === numOfEmptyItem
+      || numOfClickedItem - Math.sqrt(numOfItems) === numOfEmptyItem
+      || ((numOfClickedItem + 1) === numOfEmptyItem
+          && (numOfEmptyItem - 1) % (Math.sqrt(numOfItems)) !== 0)
+      || ((numOfClickedItem - 1) === numOfEmptyItem
+          && (numOfEmptyItem) % (Math.sqrt(numOfItems)) !== 0)
+  ) {
+    evt.target.style.left = `${emptyItemLeft}%`;
+    evt.target.style.top = `${emptyItemTop}%`;
+    emptyItem.style.left = `${clickItemLeft}%`;
+    emptyItem.style.top = `${clickItemTop}%`;
+  }
 });

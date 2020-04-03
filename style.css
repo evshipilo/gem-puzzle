@@ -37,7 +37,8 @@ body {
   justify-content: center;
   background-color: rgba(209, 209, 106, 0.5);
   font-size: 4.5vw;
-  transition: all 1s;
+  border-radius: 10%;
+  transition: all 0.3s;
 }
 
 .hidden {
