@@ -2,7 +2,7 @@
 const body = document.querySelector('body');
 const arrOfItemValues = [];
 // let arrOfItemValuesStraight = [];
-const numOfItems = 4;
+const numOfItems = 9;
 let arrOfItems = [];
 let clickItemLeft;
 let clickItemTop;
