@@ -2,7 +2,7 @@
 const body = document.querySelector('body');
 const arrOfItemValues = [];
 // let arrOfItemValuesStraight = [];
-const numOfItems = 36;
+const numOfItems = 4;
 let arrOfItems = [];
 let clickItemLeft;
 let clickItemTop;
@@ -64,6 +64,19 @@ function generatePuzzleRandom() {
 
 generatePuzzleRandom();
 
+function isWin() {
+  for (let i = 1; i <= numOfItems; i += 1) {
+    const someItem = document.querySelector(`.item${i}`);
+    const [someItemLeft] = someItem.style.left.split('%');
+    const [someItemTop] = someItem.style.top.split('%');
+    const numOfSomeItem = Math.round((someItemLeft * Math.sqrt(numOfItems)
+        + someItemTop * numOfItems) / 100) + 1;
+    // console.log(`i=${i}   item=${numOfSomeItem}`);
+    if (i !== numOfSomeItem) return false;
+  }
+  return true;
+}
+
 puzzleDiv.addEventListener('click', (evt) => {
   const emptyItem = document.querySelector(`.item${numOfItems}`);
   const numOfClickedItem = Math.round((clickItemLeft * Math.sqrt(numOfItems)
@@ -84,6 +97,8 @@ puzzleDiv.addEventListener('click', (evt) => {
     emptyItem.style.left = `${clickItemLeft}%`;
     emptyItem.style.top = `${clickItemTop}%`;
   }
+  if (isWin())window.setTimeout(() => alert('Win'), 400);
+  else console.log('not win');
 });
 
 let drugItem;
