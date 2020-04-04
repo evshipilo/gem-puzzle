@@ -21,13 +21,14 @@ body {
 
 .puzzle {
   margin: 0 auto;
-  width: 50vw;
+  width: 35vw;
   display: block;
   position: relative;
   outline: 2px solid black;
   cursor: pointer;
 }
 .puzzle div {
+  z-index: 10;
   box-sizing: border-box;
   position: absolute;
   margin-bottom: 2px;
@@ -35,7 +36,7 @@ body {
   border: 1px solid black;
   align-items: center;
   justify-content: center;
-  background-color: rgba(209, 209, 106, 0.5);
+  background-color: #d1d16a;
   font-size: 4.5vw;
   border-radius: 10%;
   transition: all 0.3s;
