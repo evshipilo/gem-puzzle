@@ -2,7 +2,7 @@
 const body = document.querySelector('body');
 const arrOfItemValues = [];
 // let arrOfItemValuesStraight = [];
-const numOfItems = 9;
+const numOfItems = 36;
 let arrOfItems = [];
 let clickItemLeft;
 let clickItemTop;
@@ -54,10 +54,10 @@ function generatePuzzleRandom() {
   makeStraightArrOfItemValues();
   arrOfItemValues.sort(makeRandomArr);
   for (let i = 0; i < numOfItems; i += 1) {
-    puzzleDiv.insertAdjacentHTML('afterbegin', `
-<div class="item${arrOfItemValues[i]}">${arrOfItemValues[i]}</div>`);
+    puzzleDiv.insertAdjacentHTML('afterbegin',
+      `<div class="item${arrOfItemValues[i]}">${arrOfItemValues[i]}</div>`);
   }
-  document.querySelector(`.item${numOfItems}`).style.opacity = 0;
+  document.querySelector(`.item${numOfItems}`).style.opacity = '0';
   arrOfItems = document.querySelectorAll('.puzzle div');
   setPositionOfItem();
 }
@@ -66,11 +66,6 @@ generatePuzzleRandom();
 
 puzzleDiv.addEventListener('click', (evt) => {
   const emptyItem = document.querySelector(`.item${numOfItems}`);
-  // [clickItemLeft] = evt.target.style.left.split('%');
-  // [clickItemTop] = evt.target.style.top.split('%');
-  // [emptyItemLeft] = emptyItem.style.left.split('%');
-  // [emptyItemTop] = emptyItem.style.top.split('%');
-
   const numOfClickedItem = Math.round((clickItemLeft * Math.sqrt(numOfItems)
       + clickItemTop * numOfItems) / 100) + 1;
   const numOfEmptyItem = Math.round((emptyItemLeft * Math.sqrt(numOfItems)
@@ -96,6 +91,7 @@ let topPointOfItemClick;
 let leftPointOfItemClick;
 
 puzzleDiv.addEventListener('mousedown', (evt) => {
+  arrOfItems.forEach((item_) => { const item = item_; item.style.zIndex = '10'; });
   const emptyItem = document.querySelector(`.item${numOfItems}`);
   [clickItemLeft] = evt.target.style.left.split('%');
   [clickItemTop] = evt.target.style.top.split('%');
@@ -137,7 +133,6 @@ document.addEventListener('mousemove', (event) => {
 
 puzzleDiv.addEventListener('mouseup', () => {
   if (drugItem) {
-    drugItem.style.zIndex = '10';
     drugItem.style.transition = 'all 0.3s';
     drugItem = null;
   }
