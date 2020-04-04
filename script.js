@@ -1,16 +1,25 @@
 
 const body = document.querySelector('body');
 const arrOfItemValues = [];
-// let arrOfItemValuesStraight = [];
 const numOfItems = 9;
 let arrOfItems = [];
 let clickItemLeft;
 let clickItemTop;
 let emptyItemLeft;
 let emptyItemTop;
-
+let numOfTurns = 0;
 function createPuzzleDiv() {
-  body.insertAdjacentHTML('afterbegin', '<div class="puzzle"></div>');
+  body.insertAdjacentHTML('afterbegin',
+    `<div class="info-time">
+\t<span>Время игры:</span>
+\t<span class="time"></span>
+</div>
+<div class="info-turns">
+\t<span>Количество ходов:</span>
+\t<span class="turns">${numOfTurns}</span>
+</div>
+<div class="puzzle">
+</div>`);
 }
 
 createPuzzleDiv();
@@ -78,6 +87,8 @@ function isWin() {
 }
 
 puzzleDiv.addEventListener('click', (evt) => {
+  numOfTurns += 1;
+  document.querySelector('.turns').innerHTML = `${numOfTurns}`;// count of turns
   const emptyItem = document.querySelector(`.item${numOfItems}`);
   const numOfClickedItem = Math.round((clickItemLeft * Math.sqrt(numOfItems)
       + clickItemTop * numOfItems) / 100) + 1;
