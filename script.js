@@ -1,5 +1,4 @@
-const numOfItems = 16;
-
+let numOfItems = 16;
 function puzzle() {
   const body = document.querySelector('body');
   const arrOfItemValues = [];
@@ -12,19 +11,14 @@ function puzzle() {
   let isStart = false;
   let isTimer = false;
 
-  document.querySelectorAll('div').forEach((item)=>{
+  document.querySelectorAll('div').forEach((item) => {
     item.remove();
-  })
+  });
 
   function createPuzzleDiv() {
-    body.insertAdjacentHTML('afterbegin',
-      `<button class="n3">Новая игра 3x3</button>
-<button class="n4">Новая игра 4x4</button>
-<button class="n5">Новая игра 5x5</button>
-<button class="n6">Новая игра 6x6</button>
-<button class="n7">Новая игра 7x7</button>
-<button class="n8">Новая игра 8x8</button>
-<button class="restart">Начать</button>
+    body.insertAdjacentHTML('beforeend',
+      `
+<div><button class="restart">Начать</button></div>
 <div class="info-time">
 \t<span>Время игры:</span>
 \t<span class="time"></span>
@@ -223,4 +217,18 @@ function puzzle() {
   });
 }
 
-window.onload(puzzle());
+window.onload = function () {
+  document.querySelector('body').insertAdjacentHTML('afterbegin',
+    '<button class="n3">Новая игра 3x3</button>'
+      + '<button class="n4">Новая игра 4x4</button>'
+      + '<button class="n5">Новая игра 5x5</button>'
+      + '<button class="n6">Новая игра 6x6</button>'
+      + '<button class="n7">Новая игра 7x7</button>'
+      + '<button class="n8">Новая игра 8x8</button>');
+  puzzle();
+  document.querySelector('.n3').addEventListener('click', () => {
+    numOfItems = 9;
+    puzzle();
+    console.log('new');
+  });
+};
