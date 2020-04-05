@@ -33,7 +33,7 @@ body {
   position: absolute;
   margin-bottom: 2px;
   display: inline-flex;
-  border: 1px solid black;
+  border: 1px solid white;
   align-items: center;
   justify-content: center;
   background-color: #d1d16a;
