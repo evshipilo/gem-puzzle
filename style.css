@@ -61,18 +61,32 @@ body {
 
 .restart {
   display: block;
-  margin: 0 auto;
+  margin: 10px auto;
   width: 35vw;
   font-size: 2vw;
   border-radius: 5px;
-  background: #d1d16a;
+  background: rgba(209, 209, 106, 0.5);
   outline: none;
   border: none;
   cursor: pointer;
   transition: all 0.3s;
 }
 .restart:hover {
-  background-color: rgba(209, 209, 106, 0.5);
+  background-color: #d1d16a;
+}
+
+.n3, .n4, .n5, .n6, .n7, .n8 {
+  width: 15vw;
+  font-size: 2vw;
+  border-radius: 5px;
+  background: rgba(209, 209, 106, 0.5);
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.n3:hover, .n4:hover, .n5:hover, .n6:hover, .n7:hover, .n8:hover {
+  background-color: #d1d16a;
 }
 
 /*# sourceMappingURL=style.css.map */
