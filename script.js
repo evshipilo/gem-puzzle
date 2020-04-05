@@ -11,7 +11,7 @@ let numOfTurns = 0;
 let isStart = false;
 function createPuzzleDiv() {
   body.insertAdjacentHTML('afterbegin',
-    `<button class="restart">Перемешать и начать</button>
+    `<button class="restart">Начать</button>
 <div class="info-time">
 \t<span>Время игры:</span>
 \t<span class="time"></span>
@@ -86,12 +86,16 @@ function isWin() {
   }
   return true;
 }
-document.querySelector('.restart').addEventListener('click', () => {
+const restartButton = document.querySelector('.restart');
+restartButton.addEventListener('click', () => {
   // while (puzzleDiv.firstChild) {
   //   puzzleDiv.removeChild(puzzleDiv.firstChild);
   // }
   // generatePuzzleRandom();
-  isStart = true;
+  isStart = !isStart;
+  console.log(restartButton.innerHTML);
+  if (restartButton.innerHTML == 'Начать') restartButton.innerHTML = 'Пауза';
+  else restartButton.innerHTML = 'Начать';
 });
 
 puzzleDiv.addEventListener('click', (evt) => {
@@ -175,8 +179,10 @@ document.addEventListener('mousemove', (event) => {
 });
 
 puzzleDiv.addEventListener('mouseup', () => {
-  if (drugItem) {
-    drugItem.style.transition = 'all 0.3s';
-    drugItem = null;
+  if (isStart) {
+    if (drugItem) {
+      drugItem.style.transition = 'all 0.3s';
+      drugItem = null;
+    }
   }
 });
