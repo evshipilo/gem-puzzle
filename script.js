@@ -9,6 +9,7 @@ let emptyItemLeft;
 let emptyItemTop;
 let numOfTurns = 0;
 let isStart = false;
+let isTimer = false;
 function createPuzzleDiv() {
   body.insertAdjacentHTML('afterbegin',
     `<button class="restart">Начать</button>
@@ -86,15 +87,31 @@ function isWin() {
   }
   return true;
 }
+
+let second = 0;
+let minute = 0;
+function timer() {
+  const i = setInterval(() => {
+    if (!isTimer) { clearInterval(i); }
+    second += 1;
+    if (second === 60) {
+      second = 0;
+      minute += 1;
+    }
+    document.querySelector('.time').innerHTML = `${minute}:${second}`;
+  }, 1000);
+}
+
 const restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', () => {
   // while (puzzleDiv.firstChild) {
   //   puzzleDiv.removeChild(puzzleDiv.firstChild);
   // }
   // generatePuzzleRandom();
+  isTimer = !isTimer;
+  if (isTimer) timer();
   isStart = !isStart;
-  console.log(restartButton.innerHTML);
-  if (restartButton.innerHTML == 'Начать') restartButton.innerHTML = 'Пауза';
+  if (restartButton.innerHTML.toString() === 'Начать') restartButton.innerHTML = 'Пауза';
   else restartButton.innerHTML = 'Начать';
 });
 

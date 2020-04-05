@@ -64,6 +64,15 @@ body {
   margin: 0 auto;
   width: 35vw;
   font-size: 2vw;
+  border-radius: 5px;
+  background: #d1d16a;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.restart:hover {
+  background-color: rgba(209, 209, 106, 0.5);
 }
 
 /*# sourceMappingURL=style.css.map */
