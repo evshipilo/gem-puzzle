@@ -1,16 +1,18 @@
 
 const body = document.querySelector('body');
 const arrOfItemValues = [];
-const numOfItems = 9;
+const numOfItems = 16;
 let arrOfItems = [];
 let clickItemLeft;
 let clickItemTop;
 let emptyItemLeft;
 let emptyItemTop;
 let numOfTurns = 0;
+let isStart = false;
 function createPuzzleDiv() {
   body.insertAdjacentHTML('afterbegin',
-    `<div class="info-time">
+    `<button class="restart">Перемешать и начать</button>
+<div class="info-time">
 \t<span>Время игры:</span>
 \t<span class="time"></span>
 </div>
@@ -80,36 +82,44 @@ function isWin() {
     const [someItemTop] = someItem.style.top.split('%');
     const numOfSomeItem = Math.round((someItemLeft * Math.sqrt(numOfItems)
         + someItemTop * numOfItems) / 100) + 1;
-    // console.log(`i=${i}   item=${numOfSomeItem}`);
     if (i !== numOfSomeItem) return false;
   }
   return true;
 }
+document.querySelector('.restart').addEventListener('click', () => {
+  // while (puzzleDiv.firstChild) {
+  //   puzzleDiv.removeChild(puzzleDiv.firstChild);
+  // }
+  // generatePuzzleRandom();
+  isStart = true;
+});
 
 puzzleDiv.addEventListener('click', (evt) => {
-  numOfTurns += 1;
-  document.querySelector('.turns').innerHTML = `${numOfTurns}`;// count of turns
-  const emptyItem = document.querySelector(`.item${numOfItems}`);
-  const numOfClickedItem = Math.round((clickItemLeft * Math.sqrt(numOfItems)
+  if (isStart) {
+    numOfTurns += 1;
+    document.querySelector('.turns').innerHTML = `${numOfTurns}`;// count of turns
+    const emptyItem = document.querySelector(`.item${numOfItems}`);
+    const numOfClickedItem = Math.round((clickItemLeft * Math.sqrt(numOfItems)
       + clickItemTop * numOfItems) / 100) + 1;
-  const numOfEmptyItem = Math.round((emptyItemLeft * Math.sqrt(numOfItems)
+    const numOfEmptyItem = Math.round((emptyItemLeft * Math.sqrt(numOfItems)
       + emptyItemTop * numOfItems) / 100) + 1;
 
-  if (numOfClickedItem + Math.sqrt(numOfItems) === numOfEmptyItem
+    if (numOfClickedItem + Math.sqrt(numOfItems) === numOfEmptyItem
       || numOfClickedItem - Math.sqrt(numOfItems) === numOfEmptyItem
       || ((numOfClickedItem + 1) === numOfEmptyItem
           && (numOfEmptyItem - 1) % (Math.sqrt(numOfItems)) !== 0)
       || ((numOfClickedItem - 1) === numOfEmptyItem
           && (numOfEmptyItem) % (Math.sqrt(numOfItems)) !== 0)
-  ) {
-    const event = evt;
-    event.target.style.left = `${emptyItemLeft}%`;
-    event.target.style.top = `${emptyItemTop}%`;
-    emptyItem.style.left = `${clickItemLeft}%`;
-    emptyItem.style.top = `${clickItemTop}%`;
+    ) {
+      const event = evt;
+      event.target.style.left = `${emptyItemLeft}%`;
+      event.target.style.top = `${emptyItemTop}%`;
+      emptyItem.style.left = `${clickItemLeft}%`;
+      emptyItem.style.top = `${clickItemTop}%`;
+    }
+    if (isWin())window.setTimeout(() => alert('Win'), 400);
+    else console.log('not win');
   }
-  if (isWin())window.setTimeout(() => alert('Win'), 400);
-  else console.log('not win');
 });
 
 let drugItem;
@@ -117,43 +127,50 @@ let topPointOfItemClick;
 let leftPointOfItemClick;
 
 puzzleDiv.addEventListener('mousedown', (evt) => {
-  arrOfItems.forEach((item_) => { const item = item_; item.style.zIndex = '10'; });
-  const emptyItem = document.querySelector(`.item${numOfItems}`);
-  [clickItemLeft] = evt.target.style.left.split('%');
-  [clickItemTop] = evt.target.style.top.split('%');
-  [emptyItemLeft] = emptyItem.style.left.split('%');
-  [emptyItemTop] = emptyItem.style.top.split('%');
+  if (isStart) {
+    arrOfItems.forEach((item_) => {
+      const item = item_;
+      item.style.zIndex = '10';
+    });
+    const emptyItem = document.querySelector(`.item${numOfItems}`);
+    [clickItemLeft] = evt.target.style.left.split('%');
+    [clickItemTop] = evt.target.style.top.split('%');
+    [emptyItemLeft] = emptyItem.style.left.split('%');
+    [emptyItemTop] = emptyItem.style.top.split('%');
 
-  const numOfClickedItem = Math.round((clickItemLeft * Math.sqrt(numOfItems)
-      + clickItemTop * numOfItems) / 100) + 1;
-  const numOfEmptyItem = Math.round((emptyItemLeft * Math.sqrt(numOfItems)
-      + emptyItemTop * numOfItems) / 100) + 1;
+    const numOfClickedItem = Math.round((clickItemLeft * Math.sqrt(numOfItems)
+        + clickItemTop * numOfItems) / 100) + 1;
+    const numOfEmptyItem = Math.round((emptyItemLeft * Math.sqrt(numOfItems)
+        + emptyItemTop * numOfItems) / 100) + 1;
 
-  if (numOfClickedItem + Math.sqrt(numOfItems) === numOfEmptyItem
-      || numOfClickedItem - Math.sqrt(numOfItems) === numOfEmptyItem
-      || ((numOfClickedItem + 1) === numOfEmptyItem
-          && (numOfEmptyItem - 1) % (Math.sqrt(numOfItems)) !== 0)
-      || ((numOfClickedItem - 1) === numOfEmptyItem
-          && (numOfEmptyItem) % (Math.sqrt(numOfItems)) !== 0)
-  ) {
-    drugItem = evt.target;
-    drugItem.style.zIndex = '11';
-    drugItem.style.transition = 'none';
-    topPointOfItemClick = evt.offsetY;
-    leftPointOfItemClick = evt.offsetX;
-    const event = evt;
-    event.target.ondragstart = function () {
-      return false;
-    };
+    if (numOfClickedItem + Math.sqrt(numOfItems) === numOfEmptyItem
+        || numOfClickedItem - Math.sqrt(numOfItems) === numOfEmptyItem
+        || ((numOfClickedItem + 1) === numOfEmptyItem
+            && (numOfEmptyItem - 1) % (Math.sqrt(numOfItems)) !== 0)
+        || ((numOfClickedItem - 1) === numOfEmptyItem
+            && (numOfEmptyItem) % (Math.sqrt(numOfItems)) !== 0)
+    ) {
+      drugItem = evt.target;
+      drugItem.style.zIndex = '11';
+      drugItem.style.transition = 'none';
+      topPointOfItemClick = evt.offsetY;
+      leftPointOfItemClick = evt.offsetX;
+      const event = evt;
+      event.target.ondragstart = function () {
+        return false;
+      };
+    }
   }
 });
 
 document.addEventListener('mousemove', (event) => {
-  if (drugItem) {
-    drugItem.style.left = `${((event.pageX - puzzleDiv.offsetLeft) / (puzzleWidth * 0.01))
-    - (leftPointOfItemClick / ((puzzleWidth * 0.01)))}%`;
-    drugItem.style.top = `${((event.pageY - puzzleDiv.offsetTop) / (puzzleWidth * 0.01))
-    - (topPointOfItemClick / ((puzzleWidth * 0.01)))}%`;
+  if (isStart) {
+    if (drugItem) {
+      drugItem.style.left = `${((event.pageX - puzzleDiv.offsetLeft) / (puzzleWidth * 0.01))
+      - (leftPointOfItemClick / ((puzzleWidth * 0.01)))}%`;
+      drugItem.style.top = `${((event.pageY - puzzleDiv.offsetTop) / (puzzleWidth * 0.01))
+      - (topPointOfItemClick / ((puzzleWidth * 0.01)))}%`;
+    }
   }
 });
 
