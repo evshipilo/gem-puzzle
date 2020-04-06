@@ -27,9 +27,14 @@ body {
   outline: 2px solid black;
   cursor: pointer;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .puzzle {
     width: 50vw;
+  }
+}
+@media (max-width: 768px) {
+  .puzzle {
+    width: 70vw;
   }
 }
 .puzzle div {
@@ -47,9 +52,14 @@ body {
   transition: all 0.3s;
   user-select: none;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .puzzle div {
     font-size: 4vw;
+  }
+}
+@media (max-width: 768px) {
+  .puzzle div {
+    font-size: 5vw;
   }
 }
 
