@@ -27,6 +27,11 @@ body {
   outline: 2px solid black;
   cursor: pointer;
 }
+@media (max-width: 768px) {
+  .puzzle {
+    width: 50vw;
+  }
+}
 .puzzle div {
   z-index: 10;
   box-sizing: border-box;
@@ -37,10 +42,15 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #d1d16a;
-  font-size: 4.5vw;
+  font-size: 3vw;
   border-radius: 10%;
   transition: all 0.3s;
   user-select: none;
+}
+@media (max-width: 768px) {
+  .puzzle div {
+    font-size: 4vw;
+  }
 }
 
 .hidden {
@@ -76,8 +86,8 @@ body {
 }
 
 .n3, .n4, .n5, .n6, .n7, .n8 {
-  margin-left: 3px;
-  width: 15vw;
+  margin-left: 1vw;
+  width: 20vw;
   font-size: 2vw;
   border-radius: 5px;
   background: rgba(209, 209, 106, 0.5);
@@ -88,6 +98,11 @@ body {
 }
 .n3:hover, .n4:hover, .n5:hover, .n6:hover, .n7:hover, .n8:hover {
   background-color: #d1d16a;
+}
+
+p {
+  margin: 5px auto;
+  width: 65vw;
 }
 
 /*# sourceMappingURL=style.css.map */

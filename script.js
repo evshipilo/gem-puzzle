@@ -1,4 +1,5 @@
 let numOfItems = 16;
+let interval;
 function puzzle() {
   const body = document.querySelector('body');
   const arrOfItemValues = [];
@@ -25,7 +26,7 @@ function puzzle() {
 </div>
 <div class="info-turns">
 \t<span>Количество ходов:</span>
-\t<span class="turns">${numOfTurns}</span>
+\t<span class="turns"></span>
 </div>
 <div class="puzzle">
 </div>`);
@@ -101,9 +102,9 @@ function puzzle() {
   let minute = 0;
 
   function timer() {
-    const i = setInterval(() => {
+    interval = setInterval(() => {
       if (!isTimer) {
-        clearInterval(i);
+        clearInterval(interval);
       }
       second += 1;
       if (second === 60) {
@@ -116,10 +117,6 @@ function puzzle() {
 
   const restartButton = document.querySelector('.restart');
   restartButton.addEventListener('click', () => {
-    // while (puzzleDiv.firstChild) {
-    //   puzzleDiv.removeChild(puzzleDiv.firstChild);
-    // }
-    // generatePuzzleRandom();
     isTimer = !isTimer;
     if (isTimer) timer();
     isStart = !isStart;
@@ -219,16 +216,53 @@ function puzzle() {
 
 window.onload = function () {
   document.querySelector('body').insertAdjacentHTML('afterbegin',
-    '<button class="n3">Новая игра 3x3</button>'
+    '<p><button class="n3">Новая игра 3x3</button>'
       + '<button class="n4">Новая игра 4x4</button>'
-      + '<button class="n5">Новая игра 5x5</button>'
-      + '<button class="n6">Новая игра 6x6</button>'
+      + '<button class="n5">Новая игра 5x5</button></p>'
+      + '<p><button class="n6">Новая игра 6x6</button>'
       + '<button class="n7">Новая игра 7x7</button>'
-      + '<button class="n8">Новая игра 8x8</button>');
+      + '<button class="n8">Новая игра 8x8</button><p>');
   puzzle();
   document.querySelector('.n3').addEventListener('click', () => {
     numOfItems = 9;
+    if (interval) {
+      clearInterval(interval);
+    }
     puzzle();
-    console.log('new');
+  });
+  document.querySelector('.n4').addEventListener('click', () => {
+    numOfItems = 16;
+    if (interval) {
+      clearInterval(interval);
+    }
+    puzzle();
+  });
+  document.querySelector('.n5').addEventListener('click', () => {
+    numOfItems = 25;
+    if (interval) {
+      clearInterval(interval);
+    }
+    puzzle();
+  });
+  document.querySelector('.n6').addEventListener('click', () => {
+    numOfItems = 36;
+    if (interval) {
+      clearInterval(interval);
+    }
+    puzzle();
+  });
+  document.querySelector('.n7').addEventListener('click', () => {
+    numOfItems = 49;
+    if (interval) {
+      clearInterval(interval);
+    }
+    puzzle();
+  });
+  document.querySelector('.n8').addEventListener('click', () => {
+    numOfItems = 64;
+    if (interval) {
+      clearInterval(interval);
+    }
+    puzzle();
   });
 };
