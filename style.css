@@ -85,7 +85,7 @@ body {
   background-color: #d1d16a;
 }
 
-.n3, .n4, .n5, .n6, .n7, .n8 {
+.n2, .n3, .n4, .n5, .n6, .n7, .n8 {
   margin-left: 1vw;
   width: 20vw;
   font-size: 2vw;
@@ -96,7 +96,7 @@ body {
   cursor: pointer;
   transition: all 0.3s;
 }
-.n3:hover, .n4:hover, .n5:hover, .n6:hover, .n7:hover, .n8:hover {
+.n2:hover, .n3:hover, .n4:hover, .n5:hover, .n6:hover, .n7:hover, .n8:hover {
   background-color: #d1d16a;
 }
 

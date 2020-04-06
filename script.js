@@ -147,8 +147,15 @@ function puzzle() {
         emptyItem.style.left = `${clickItemLeft}%`;
         emptyItem.style.top = `${clickItemTop}%`;
       }
-      if (isWin()) window.setTimeout(() => alert('Win'), 400);
-      else console.log('not win');
+      if (isWin()) {
+        window.setTimeout(() => {
+          alert(`ПОБЕДА!!! Ходов:${numOfTurns} Время:${minute}:${second}`);
+          isStart = false;
+          clearInterval(interval);
+          restartButton.classList.add('hidden');
+        },
+        400);
+      }
     }
   });
 
@@ -216,7 +223,8 @@ function puzzle() {
 
 window.onload = function () {
   document.querySelector('body').insertAdjacentHTML('afterbegin',
-    '<p><button class="n3">Новая игра 3x3</button>'
+    '<p><button class="n2">Для теста 2x2</button></p>'
+      + '<p><button class="n3">Новая игра 4x4</button>'
       + '<button class="n4">Новая игра 4x4</button>'
       + '<button class="n5">Новая игра 5x5</button></p>'
       + '<p><button class="n6">Новая игра 6x6</button>'
@@ -225,6 +233,13 @@ window.onload = function () {
   puzzle();
   document.querySelector('.n3').addEventListener('click', () => {
     numOfItems = 9;
+    if (interval) {
+      clearInterval(interval);
+    }
+    puzzle();
+  });
+  document.querySelector('.n2').addEventListener('click', () => {
+    numOfItems = 4;
     if (interval) {
       clearInterval(interval);
     }
