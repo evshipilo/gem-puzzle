@@ -126,7 +126,8 @@ function puzzle() {
 
   puzzleDiv.addEventListener('click', (evt) => {
     if (isStart) {
-      numOfTurns += 1;
+      if (evt.target !== document.querySelector(`.item${numOfItems}`)
+       && evt.target !== puzzleDiv) { numOfTurns += 1; }
       document.querySelector('.turns').innerHTML = `${numOfTurns}`;// count of turns
       const emptyItem = document.querySelector(`.item${numOfItems}`);
       const numOfClickedItem = Math.round((clickItemLeft * Math.sqrt(numOfItems)
@@ -149,10 +150,12 @@ function puzzle() {
       }
       if (isWin()) {
         window.setTimeout(() => {
-          alert(`ПОБЕДА!!! Ходов:${numOfTurns} Время:${minute}:${second}`);
+          alert(`ПОБЕДА!!! Игра:${Math.sqrt(numOfItems)}X${Math.sqrt(numOfItems)}
+           Ходов:${numOfTurns} Время:${minute}:${second}`);
           isStart = false;
           clearInterval(interval);
           restartButton.classList.add('hidden');
+          restartButton.style.cursor = 'default';
         },
         400);
       }
@@ -224,7 +227,7 @@ function puzzle() {
 window.onload = function () {
   document.querySelector('body').insertAdjacentHTML('afterbegin',
     '<p><button class="n2">Для теста 2x2</button></p>'
-      + '<p><button class="n3">Новая игра 4x4</button>'
+      + '<p><button class="n3">Новая игра 3x3</button>'
       + '<button class="n4">Новая игра 4x4</button>'
       + '<button class="n5">Новая игра 5x5</button></p>'
       + '<p><button class="n6">Новая игра 6x6</button>'
